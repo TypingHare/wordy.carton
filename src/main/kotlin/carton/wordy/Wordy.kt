@@ -3,6 +3,8 @@ package carton.wordy
 import burrow.carton.hoard.Entry
 import burrow.carton.hoard.HoardPair
 import burrow.carton.hoard.HoardTime
+import burrow.carton.wordy.command.ListCommand
+import burrow.carton.wordy.command.NewCommand
 import burrow.kernel.chamber.Chamber
 import burrow.kernel.config.Config
 import burrow.kernel.furnishing.Furnishing
@@ -10,7 +12,7 @@ import burrow.kernel.furnishing.annotation.DependsOn
 import burrow.kernel.furnishing.annotation.Furniture
 
 @Furniture(
-    version = "0.0.0",
+    version = Wordy.Version.NAME,
     description = "Learn and review vocabulary using Wordy!",
     type = Furniture.Type.MAIN
 )
@@ -22,6 +24,8 @@ class Wordy(chamber: Chamber) : Furnishing(chamber) {
     }
 
     override fun assemble() {
+        registerCommand(NewCommand::class)
+        registerCommand(ListCommand::class)
     }
 
     fun createWordEntry(word: String, translation: String): Entry {
@@ -45,5 +49,9 @@ class Wordy(chamber: Chamber) : Furnishing(chamber) {
         const val EXAMPLE = ""
         const val IS_ARCHIVED = false
         const val REVIEWS = 0
+    }
+
+    object Version {
+        const val NAME = "0.0.0"
     }
 }
