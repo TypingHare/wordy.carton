@@ -16,10 +16,18 @@ class WordCommand(data: CommandData) : Command(data) {
     )
     private var idOrWord = ""
 
+    @Option(
+        names = ["--hide-extra", "-h"],
+        description = ["Whether to hide the extra information."],
+    )
+    private var shouldHideExtraInfo = false
+
     override fun call(): Int {
-        use(Wordy::class).getWordEntry(idOrWord).apply {
-            WordPrinter(stdout, WordPrinterContext(this)).print()
+        val wordEntry = use(Wordy::class).getWordEntry(idOrWord)
+        val context = WordPrinterContext(wordEntry, getTerminalWidth()).apply {
+            shouldDisplayExtraInformation = !shouldHideExtraInfo
         }
+        WordPrinter(stdout, context).print()
 
         return ExitCode.OK
     }
