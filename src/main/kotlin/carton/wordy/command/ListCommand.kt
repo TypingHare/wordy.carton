@@ -37,6 +37,7 @@ class ListCommand(data: CommandData) : Command(data) {
                 "--keys",
                 "word; translation; reviews",
                 "--reverse=$shouldReverse",
+                "--spacing=4"
             )
         )
     }
