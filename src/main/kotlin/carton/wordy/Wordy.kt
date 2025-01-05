@@ -4,10 +4,7 @@ import burrow.carton.hoard.Entry
 import burrow.carton.hoard.Hoard
 import burrow.carton.hoard.HoardPair
 import burrow.carton.hoard.HoardTime
-import burrow.carton.wordy.command.ArchiveCommand
-import burrow.carton.wordy.command.ListCommand
-import burrow.carton.wordy.command.NewCommand
-import burrow.carton.wordy.command.WordCommand
+import burrow.carton.wordy.command.*
 import burrow.kernel.config.Config
 import burrow.kernel.converter.StringConverterPairs
 import burrow.kernel.furniture.Furnishing
@@ -39,6 +36,7 @@ class Wordy(renovator: Renovator) : Furnishing(renovator) {
         registerCommand(WordCommand::class)
         registerCommand(ListCommand::class)
         registerCommand(ArchiveCommand::class)
+        registerCommand(RecentCommand::class)
 
         use(Hoard::class).converterPairsContainer.apply {
             add(EntryKey.IS_ARCHIVED, StringConverterPairs.BOOLEAN)

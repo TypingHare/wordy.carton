@@ -14,7 +14,7 @@ class WordCommand(data: CommandData) : Command(data) {
         index = "0",
         description = ["The ID of the word to display."]
     )
-    private var idOrWord: String = ""
+    private var idOrWord = ""
 
     override fun call(): Int {
         use(Wordy::class).getWordEntry(idOrWord).apply {

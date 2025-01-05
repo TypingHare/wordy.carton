@@ -13,7 +13,7 @@ class ListCommand(data: CommandData) : Command(data) {
         description = ["The start ID of words to display."],
         defaultValue = "1"
     )
-    private var startId: Int = 1
+    private var startId = 1
 
     @Parameters(
         index = "1",
