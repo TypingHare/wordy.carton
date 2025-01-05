@@ -3,15 +3,14 @@ plugins {
 }
 
 group = "burrow"
-version = "1.0-SNAPSHOT"
+version = "0.0.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation(files("/Users/jameschan/.burrow/libs/burrow-0.0.0-all.jar"))
-
+    implementation(files("/Users/james/.burrow/libs/burrow-0.0.0-all.jar"))
     testImplementation(kotlin("test"))
 }
 

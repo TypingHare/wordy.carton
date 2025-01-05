@@ -1,5 +1,3 @@
 package burrow
 
-fun main() {
-    println("Hello World!")
-}
+fun main() = Unit

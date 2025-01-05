@@ -1,39 +1,28 @@
 package burrow.carton.wordy.command
 
-import burrow.carton.wordy.printer.WordPrinter
-import burrow.kernel.command.Command
-import burrow.kernel.command.CommandData
-import carton.wordy.Wordy
-import picocli.CommandLine
-import picocli.CommandLine.ExitCode
-import picocli.CommandLine.Parameters
+import burrow.kernel.terminal.*
+import burrow.carton.wordy.Wordy
 
-@CommandLine.Command(
+@BurrowCommand(
     name = "new",
-    description = ["Creates a new translation entry."]
+    header = ["Includes a new word."]
 )
 class NewCommand(data: CommandData) : Command(data) {
     @Parameters(
         index = "0",
-        description = [
-            "The word in the entry."
-        ]
+        description = ["The word to include."]
     )
     private var word = ""
 
     @Parameters(
         index = "1",
-        description = [
-            "The translation of the word."
-        ]
+        description = ["The translation of the word."]
     )
     private var translation = ""
 
     @Parameters(
         index = "2",
-        description = [
-            "An example of the usage of the word."
-        ],
+        description = ["An example of the usage of the word."],
         defaultValue = ""
     )
     private var example = ""
@@ -41,11 +30,9 @@ class NewCommand(data: CommandData) : Command(data) {
     override fun call(): Int {
         val entry = use(Wordy::class).createWordEntry(word, translation)
         if (example.isNotEmpty()) {
-            entry.set(Wordy.EntryKey.EXAMPLE, example)
+            entry[Wordy.EntryKey.EXAMPLE] = example
         }
 
-        WordPrinter(stdout, entry).print()
-
-        return ExitCode.OK
+        return dispatch(WordCommand::class,listOf(entry.id))
     }
 }
