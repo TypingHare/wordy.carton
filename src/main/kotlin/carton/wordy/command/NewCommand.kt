@@ -1,7 +1,10 @@
 package burrow.carton.wordy.command
 
-import burrow.kernel.terminal.*
 import burrow.carton.wordy.Wordy
+import burrow.kernel.terminal.BurrowCommand
+import burrow.kernel.terminal.Command
+import burrow.kernel.terminal.CommandData
+import burrow.kernel.terminal.Parameters
 
 @BurrowCommand(
     name = "new",
@@ -30,9 +33,9 @@ class NewCommand(data: CommandData) : Command(data) {
     override fun call(): Int {
         val entry = use(Wordy::class).createWordEntry(word, translation)
         if (example.isNotEmpty()) {
-            entry[Wordy.EntryKey.EXAMPLE] = example
+            entry.update(Wordy.EntryKey.EXAMPLE, example)
         }
 
-        return dispatch(WordCommand::class,listOf(entry.id))
+        return dispatch(WordCommand::class, listOf(entry.id))
     }
 }

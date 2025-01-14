@@ -16,7 +16,7 @@ class ArchiveCommand(data: CommandData) : Command(data) {
 
     override fun call(): Int {
         use(Wordy::class).getWordEntry(idOrWord).apply {
-            this[Wordy.EntryKey.IS_ARCHIVED] = true
+            update(Wordy.EntryKey.IS_ARCHIVED, true)
         }
 
         return ExitCode.OK

@@ -10,7 +10,7 @@ import burrow.carton.inverse.annotation.ConverterPairType
 import burrow.carton.inverse.annotation.InverseRegisterCommands
 import burrow.carton.inverse.annotation.InverseSetConfig
 import burrow.carton.wordy.Wordy.EntryKey
-import burrow.common.converter.StringConverterPairs
+import burrow.common.converter.StringConverterPair
 import burrow.common.palette.Highlight
 import burrow.common.palette.Style
 import burrow.kernel.furniture.Furnishing
@@ -45,17 +45,21 @@ const val REQUIRED_BURROW_VERSION = "0.0.0"
 @InverseRegisterCommands
 class Wordy(renovator: Renovator) : Furnishing(renovator) {
     override fun assemble() {
-        use(Hoard::class).converterPairsContainer.apply {
-            add(EntryKey.IS_ARCHIVED, StringConverterPairs.BOOLEAN)
-            add(EntryKey.REVIEWS, StringConverterPairs.INT)
+        use(Hoard::class).storage.apply {
+            addMapping(EntryKey.IS_ARCHIVED, StringConverterPair.BOOLEAN)
+            addMapping(EntryKey.REVIEWS, StringConverterPair.INT)
         }
     }
 
     fun createWordEntry(word: String, translation: String): Entry {
         val entry = use(HoardPair::class).createEntry(word, translation)
-        entry[EntryKey.EXAMPLE] = EntryDefault.EXAMPLE
-        entry[EntryKey.IS_ARCHIVED] = EntryDefault.IS_ARCHIVED
-        entry[EntryKey.REVIEWS] = EntryDefault.REVIEWS
+        entry.update(
+            mapOf(
+                EntryKey.EXAMPLE to EntryDefault.EXAMPLE,
+                EntryKey.IS_ARCHIVED to EntryDefault.IS_ARCHIVED,
+                EntryKey.REVIEWS to EntryDefault.REVIEWS,
+            )
+        )
 
         return entry
     }
@@ -63,7 +67,7 @@ class Wordy(renovator: Renovator) : Furnishing(renovator) {
     fun getWordEntry(idOrWord: String): Entry =
         when (val id = idOrWord.toIntOrNull()) {
             null -> use(Wordy::class).getWordEntryByWord(idOrWord)
-            else -> use(Hoard::class)[id]
+            else -> use(Hoard::class).storage[id]
         }
 
     fun getRandomWordEntries(

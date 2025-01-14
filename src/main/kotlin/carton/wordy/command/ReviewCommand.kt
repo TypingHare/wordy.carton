@@ -30,23 +30,15 @@ class ReviewCommand(data: CommandData) : Command(data) {
             else -> count
         }
 
-        var isFirst = true
-        use(Hoard::class)
+        use(Hoard::class).storage
             .getAllEntries()
             .let { use(Wordy::class).getRandomWordEntries(it, realCount) }
-            .forEach {
-                val reviews = it.get<Int>(Wordy.EntryKey.REVIEWS)!!
-                val properties = mapOf(
-                    Wordy.EntryKey.REVIEWS to (reviews + 1).toString()
-                )
-                use(Hoard::class).setProperties(it, properties)
+            .forEachIndexed { index, entry ->
+                val reviews = entry.get<Int>(Wordy.EntryKey.REVIEWS)!!
+                entry.update(Wordy.EntryKey.REVIEWS, reviews + 1)
 
-                if (isFirst) {
-                    isFirst = false
-                } else {
-                    stdout.println()
-                }
-                dispatch(WordCommand::class, listOf(it.id, "--hide-extra"))
+                if (index > 0) stdout.println()
+                dispatch(WordCommand::class, listOf(entry.id, "--hide-extra"))
             }
 
         return ExitCode.OK

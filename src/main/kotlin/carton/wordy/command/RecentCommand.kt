@@ -19,7 +19,7 @@ class RecentCommand(data: CommandData) : Command(data) {
     private var length = 8
 
     override fun call(): Int {
-        val maxId = use(Hoard::class).maxId
+        val maxId = use(Hoard::class).storage.maxId
         return dispatch(
             ListCommand::class,
             listOf(maxId, length, "--reverse=true")
