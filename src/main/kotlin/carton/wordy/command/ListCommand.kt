@@ -5,7 +5,7 @@ import burrow.kernel.terminal.*
 
 @BurrowCommand(
     name = "list",
-    header = ["Display a list of words."],
+    header = ["Displays a list of words."],
 )
 class ListCommand(data: CommandData) : Command(data) {
     @Parameters(

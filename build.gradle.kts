@@ -9,14 +9,20 @@ repositories {
     mavenCentral()
 }
 
+kotlin {
+    jvmToolchain(21)
+}
+
 dependencies {
-    implementation(files("/Users/james/.burrow/libs/burrow-0.0.0-all.jar"))
+    implementation(files("/Users/james/.burrow/libs/burrow.jar"))
     testImplementation(kotlin("test"))
 }
 
 tasks.test {
     useJUnitPlatform()
 }
-kotlin {
-    jvmToolchain(21)
+
+tasks.jar {
+    archiveBaseName.set("wordy.carton")
+    archiveVersion.set("")
 }

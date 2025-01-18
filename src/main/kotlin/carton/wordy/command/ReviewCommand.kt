@@ -6,7 +6,7 @@ import burrow.kernel.terminal.*
 
 @BurrowCommand(
     name = "review",
-    header = ["Review words with a weighted random selection."],
+    header = ["Reviews words with a weighted random selection."],
     description = [
         "Selects words randomly from the database, prioritizing words with fewer reviews. " +
                 "Ensures no duplicate words are displayed during a session. Each displayed word " +
