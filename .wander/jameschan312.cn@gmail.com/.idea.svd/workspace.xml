@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f4a1e8f-8bf8-4a4b-af21-870fd09cd4dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/justfile" beforeDir="false" afterPath="$PROJECT_DIR$/justfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/carton/wordy/command/ListCommand.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/carton/wordy/command/ListCommand.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/carton/wordy/command/ReviewCommand.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/carton/wordy/command/ReviewCommand.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/carton.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/carton.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +66,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/james/git/wordy.carton",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -82,11 +87,32 @@
       <recent name="carton.wordy.command" />
     </key>
   </component>
+  <component name="RubyModuleManagerSettings">
+    <option name="blackListedRootsPaths">
+      <list>
+        <option value="$PROJECT_DIR$" />
+        <option value="$PROJECT_DIR$/src/main" />
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="wordy.carton" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="wordy.carton" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
       </set>
     </attachedChunks>
   </component>
@@ -107,7 +133,12 @@
       <workItem from="1736100334972" duration="3554000" />
       <workItem from="1736106342717" duration="4507000" />
       <workItem from="1736110863195" duration="46000" />
-      <workItem from="1736110956290" duration="1754000" />
+      <workItem from="1736110956290" duration="2187000" />
+      <workItem from="1736117552930" duration="580000" />
+      <workItem from="1736118308478" duration="10000" />
+      <workItem from="1736885457453" duration="1918000" />
+      <workItem from="1736890470665" duration="16000" />
+      <workItem from="1737222521882" duration="570000" />
     </task>
     <servers />
   </component>
