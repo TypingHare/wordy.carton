@@ -45,6 +45,8 @@ class Wordy(
             RecentCommand::class,
         )
 
+        useSpec(Hoard::class).recordClassName = WordRecord::class.java.name
+
         useSpec(HoardPair::class).let {
             it.keyName = "word"
             it.valueName = "translation"
