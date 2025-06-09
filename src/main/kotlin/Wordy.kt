@@ -27,7 +27,10 @@ import kotlin.random.Random
     description = "Learn and review vocabulary using Wordy!",
     type = Furniture.Type.MAIN
 )
-class Wordy(renovator: Renovator, blueprint: Blueprint) : Furnishing<WordySpec>(renovator, blueprint) {
+class Wordy(
+    renovator: Renovator,
+    blueprint: Blueprint
+) : Furnishing<WordySpec>(renovator, blueprint) {
     override fun initSpec(rawSpec: RawSpec) = WordySpec().apply {
         setSpec<Double>("nextCount") { nextCount = it.toInt() }
     }
