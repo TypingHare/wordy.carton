@@ -1,24 +1,25 @@
 package burrow.carton.wordy.command
 
+import burrow.carton.core.command.CoreCommand
 import burrow.carton.wordy.Wordy
-import burrow.kernel.terminal.*
+import picocli.CommandLine
 
-@BurrowCommand(
+@CommandLine.Command(
     name = "archive",
     header = ["Archives a word."]
 )
-class ArchiveCommand(data: CommandData) : Command(data) {
-    @Parameters(
+class ArchiveCommand() : CoreCommand() {
+    @CommandLine.Parameters(
         index = "0",
         description = ["The ID or the word of the word entry to archive."]
     )
     private var idOrWord = ""
 
     override fun call(): Int {
-        use(Wordy::class).getWordEntry(idOrWord).apply {
-            update(Wordy.EntryKey.IS_ARCHIVED, true)
-        }
+        super.call()
 
-        return ExitCode.OK
+        use(Wordy::class).getWordRecord(idOrWord).isArchived = true
+
+        return CommandLine.ExitCode.OK
     }
 }
