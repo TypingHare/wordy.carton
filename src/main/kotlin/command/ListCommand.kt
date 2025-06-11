@@ -2,7 +2,6 @@ package burrow.carton.wordy.command
 
 import burrow.carton.core.command.CoreCommand
 import burrow.carton.hoard.Hoard
-import burrow.carton.web.WebRecord
 import burrow.carton.wordy.record.WordRecord
 import picocli.CommandLine
 
@@ -35,22 +34,11 @@ class ListCommand() : CoreCommand() {
         super.call()
 
         use(Hoard::class).getAllRecords<WordRecord>().forEach { wordRecord ->
-            val (word, translation, _, _, _, _, _) =  wordRecord
+            val (word, translation, _, _, _, _, _) = wordRecord
             stdout.println(
                 "${wordRecord.id.toString().padEnd(4)} $word $translation"
             )
         }
-//        return dispatch(
-//            TableCommand::class,
-//            listOf(
-//                startId,
-//                length,
-//                "--keys",
-//                "word; translation; reviews",
-//                "--reverse=$shouldReverse",
-//                "--spacing=4"
-//            )
-//        )
 
         return CommandLine.ExitCode.OK
     }

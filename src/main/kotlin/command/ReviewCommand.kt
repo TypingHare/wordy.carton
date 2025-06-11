@@ -33,10 +33,12 @@ class ReviewCommand() : CoreCommand() {
             else -> count
         }
 
-        use(Hoard::class).getAllRecords<WordRecord>()
+        val hoard = use(Hoard::class)
+        hoard.getAllRecords<WordRecord>()
             .let { use(Wordy::class).getRandomWordEntries(it, realCount) }
             .forEachIndexed { index, record ->
                 record.reviews += 1
+                hoard.updateRecord(record)
                 if (index > 0) stdout.println()
                 dispatch(WordCommand::class, record.id, "--hide-extra")
             }

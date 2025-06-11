@@ -9,6 +9,7 @@ import burrow.carton.hoard.HoardTime
 import burrow.carton.wordy.command.ListCommand
 import burrow.carton.wordy.command.AddCommand
 import burrow.carton.wordy.command.ArchiveCommand
+import burrow.carton.wordy.command.NotFoundCommand
 import burrow.carton.wordy.command.RecentCommand
 import burrow.carton.wordy.command.ReviewCommand
 import burrow.carton.wordy.command.WordCommand
@@ -43,6 +44,7 @@ class Wordy(
             ReviewCommand::class,
             ArchiveCommand::class,
             RecentCommand::class,
+            NotFoundCommand::class,
         )
 
         useSpec(Hoard::class).recordClassName = WordRecord::class.java.name
