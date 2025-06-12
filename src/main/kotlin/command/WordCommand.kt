@@ -27,7 +27,7 @@ class WordCommand() : CoreCommand() {
         super.call()
 
         val wordEntry = use(Wordy::class).getWordRecord(idOrWord)
-        val context = WordPrinterContext(wordEntry, 80).apply {
+        val context = WordPrinterContext(wordEntry, getTerminalWidth()).apply {
             shouldDisplayExtraInformation = !shouldHideExtraInfo
         }
         WordPrinter(stdout, context).print()

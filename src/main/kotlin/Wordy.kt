@@ -3,24 +3,18 @@ package burrow.carton.wordy
 import burrow.carton.core.Core
 import burrow.carton.core.command.palette.Highlight
 import burrow.carton.core.command.palette.Style
+import burrow.carton.found.Found
+import burrow.carton.found.StillNotFoundException
 import burrow.carton.hoard.Hoard
 import burrow.carton.hoard.HoardPair
-import burrow.carton.hoard.HoardTime
-import burrow.carton.wordy.command.ListCommand
-import burrow.carton.wordy.command.AddCommand
-import burrow.carton.wordy.command.ArchiveCommand
-import burrow.carton.wordy.command.NotFoundCommand
-import burrow.carton.wordy.command.RecentCommand
-import burrow.carton.wordy.command.ReviewCommand
-import burrow.carton.wordy.command.WordCommand
+import burrow.carton.shell.Shell
+import burrow.carton.wordy.command.*
 import burrow.carton.wordy.record.WordRecord
 import burrow.kernel.Blueprint
-import burrow.kernel.chamber.Dependency
 import burrow.kernel.chamber.Furnishing
 import burrow.kernel.chamber.Furniture
 import burrow.kernel.chamber.RawSpec
 import burrow.kernel.chamber.Renovator
-import burrow.kernel.chamber.Spec
 import kotlin.random.Random
 
 @Furniture(
@@ -44,7 +38,6 @@ class Wordy(
             ReviewCommand::class,
             ArchiveCommand::class,
             RecentCommand::class,
-            NotFoundCommand::class,
         )
 
         useSpec(Hoard::class).recordClassName = WordRecord::class.java.name
@@ -56,6 +49,18 @@ class Wordy(
         }
     }
 
+    override fun launch() {
+        use(Found::class).register { command, args ->
+            if (args.size != 1) {
+                throw StillNotFoundException()
+            }
+
+           command.dispatch(WordCommand::class, args[0])
+        }
+
+        use(Shell::class).createShellFileIfNotExist()
+    }
+
     fun addWordRecord(word: String, translation: String): WordRecord =
         use(HoardPair::class).addRecord(word, translation)
 
@@ -65,7 +70,8 @@ class Wordy(
             throw WordNotFoundException(word)
         }
 
-        return idSet.map { use(Hoard::class).getRecord<WordRecord>(it) }.toList()
+        return idSet.map { use(Hoard::class).getRecord<WordRecord>(it) }
+            .toList()
     }
 
     fun getWordRecord(idOrWord: String): WordRecord =
@@ -120,15 +126,6 @@ class Wordy(
         val EXTRA_INFO = Highlight(247)
     }
 }
-
-data class WordySpec(
-    override var requires: Collection<Dependency> = listOf(
-        Dependency(Core::class, "0.0.0"),
-        Dependency(HoardPair::class, "0.0.0"),
-        Dependency(HoardTime::class, "0.0.0")
-    ),
-    var nextCount : Int = 5
-): Spec(requires)
 
 class WordNotFoundException(word: String) :
     RuntimeException("Word not found: $word")
