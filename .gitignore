@@ -11,3 +11,8 @@ build
 # JetBrains IDE
 .idea
 *.iml
+
+# Other
+all.txt
+
+kls_database.db

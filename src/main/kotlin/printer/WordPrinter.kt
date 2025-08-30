@@ -22,15 +22,12 @@ class WordPrinter(writer: PrintWriter, context: WordPrinterContext) :
         val coloredTranslation =
             palette.color(translation, Highlights.TRANSLATION)
         writer.println("($id) $coloredWord   $coloredTranslation")
+        val exampleString = getExampleLinesString(
+            example,
+            context.maxColumns
+        )
         if (example.isNotBlank()) {
-            writer.println(
-                palette.color(
-                    getExampleLinesString(
-                        example,
-                        context.maxColumns
-                    ), Highlights.EXAMPLE
-                )
-            )
+            writer.println(palette.color(exampleString, Highlights.EXAMPLE))
         }
 
         if (context.shouldDisplayExtraInformation) {
